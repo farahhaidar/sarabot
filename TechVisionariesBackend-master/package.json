@@ -1,0 +1,80 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "private": true,
+  "engines": {
+    "node": "8.9.4"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.0",
+    "express": "^4.15.5",
+    "fs": "0.0.1-security",
+    "jest": "^21.2.0",
+    "morgan": "^1.9.0",
+    "pretty-error": "^2.1.1",
+    "source-map-support": "^0.4.18",
+    "supertest": "^3.0.0",
+    "watson-developer-cloud": "^2.40.0",
+    "winston": "^2.4.0",
+    "winston-daily-rotate-file": "^1.7.2",
+    "xlsx-to-json": "^0.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-jest": "^21.2.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-minify": "^0.2.0",
+    "babel-register": "^6.26.0",
+    "chokidar": "^1.7.0",
+    "del": "3.0.0",
+    "eslint": "^4.7.2",
+    "eslint-config-airbnb-base": "^12.0.1",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-flowtype": "^2.36.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "flow-bin": "^0.55.0",
+    "husky": "^0.14.3",
+    "jest-cli": "^21.2.1",
+    "jest-tobetype": "^1.1.0",
+    "lint-staged": "^4.2.3",
+    "prettier": "^1.7.1"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/tools/jest.setup.js"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add --force"
+    ],
+    "*.{json}": [
+      "prettier --parser json --write",
+      "git add --force"
+    ]
+  },
+  "scripts": {
+    "precommit": "lint-staged",
+    "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
+    "fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix .",
+    "check": "flow check",
+    "test": "jest",
+    "test-watch": "jest --watch",
+    "build": "node tools/build.js",
+    "build-watch": "node tools/build.js --watch",
+    "debug": "node -r dotenv/config --inspect=0.0.0.0:9229  tools/run.js",
+    "dev": "node -r dotenv/config tools/run.js",
+    "start": "node build/server.js"
+  }
+}

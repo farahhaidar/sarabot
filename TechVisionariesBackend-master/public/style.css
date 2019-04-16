@@ -1,0 +1,12 @@
+body {
+  background-color: rgb(41, 170, 48);
+}
+
+h1 {
+  color: white;
+  align-content: center;
+}
+
+#maindiv {
+  margin: 0 auto;
+}

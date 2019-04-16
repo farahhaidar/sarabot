@@ -1,0 +1,53 @@
+<DOCTYPE html/>
+
+<head>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js'> </script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <h1>Liquid Automations</h1>
+  <div id="maindiv" ng-app="app" ng-controller="angularController">
+    <button type="button" ng-click="testfunc()">List Workspaces</button>
+    <p>{{output}} </p>
+    <input type="text" ng-model="inputText">
+    <button type="button" ng-click="getConvResponse()">Submit</button>
+    <p>{{convResponse}} </p>
+    <button type="button" ng-click="expressBtnTest()">Submit</button>
+    <p>{{expResponse}} </p>
+  </div>
+</body>
+
+
+<script>
+  var app = angular.module("app", []);
+  app.controller("angularController", function ($scope, $http) {
+    $scope.testfunc = function () {
+      $http.get("/workspaces").then(function (response, err) {
+        $scope.output = response.data;
+      });
+    }
+    $scope.getConvResponse = function () {
+      // console.log($scope.inputText);
+      $http.post("/conversationMessage", { data: $scope.inputText }).then(function (response, err) {
+        // console.log(response);
+        $scope.convResponse = response.data;
+      })
+    }
+  });
+  /*
+  const getString = function () {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/banterlink');
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        //alert('response ' + xhr.responseText);
+        document.getElementById("output").innerHTML = xhr.responseText;
+      }
+      else {
+        alert('Request failed.  Returned status of ' + xhr.status);
+      }
+    };
+    xhr.send();
+  }; */
+</script>
